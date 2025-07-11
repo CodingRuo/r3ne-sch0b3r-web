@@ -1,0 +1,30 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Subtle tech background pattern -->
+  <defs>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/>
+    </pattern>
+    <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="30" cy="30" r="1" fill="rgba(255,255,255,0.03)"/>
+    </pattern>
+  </defs>
+  
+  <!-- Base gradient -->
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  <rect width="1920" height="1080" fill="url(#dots)"/>
+  
+  <!-- Floating geometric shapes -->
+  <g opacity="0.02">
+    <circle cx="300" cy="200" r="120" fill="rgba(255,255,255,0.1)"/>
+    <circle cx="1600" cy="800" r="100" fill="rgba(255,255,255,0.1)"/>
+    <rect x="1400" y="150" width="80" height="80" rx="40" fill="rgba(255,255,255,0.05)"/>
+    <rect x="200" y="700" width="60" height="60" rx="30" fill="rgba(255,255,255,0.05)"/>
+  </g>
+  
+  <!-- Code-like lines (very subtle) -->
+  <g opacity="0.015" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none">
+    <path d="M100,300 Q200,250 300,300 T500,300"/>
+    <path d="M1200,600 Q1300,550 1400,600 T1600,600"/>
+    <path d="M500,800 L700,820 L900,800"/>
+  </g>
+</svg>

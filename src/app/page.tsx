@@ -1,12 +1,13 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronRight, Cloud, Code, Database, Download, ExternalLink, Github, Linkedin, Mail, Phone, Server, Terminal as TerminalIcon } from "lucide-react";
+import { ChevronRight, Cloud, Code, Database, ExternalLink, Github, Mail, Server, Terminal as TerminalIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createInteractiveCV, Terminal } from '@codingruo/r3ne-sch0b3r.io';
 import '@codingruo/r3ne-sch0b3r.io/styles.css';
+import { ModeToggle } from "@/components/theme-toggle";
 
 
 export default function Home() {
@@ -67,6 +68,22 @@ export default function Home() {
     const [isFreelancerModalOpen, setIsFreelancerModalOpen] = useState(false)
 
     const [terminal, setTerminal] = useState<Terminal | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Hook für Bildschirmgröße
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768); // 768px ist der md breakpoint von Tailwind
+        };
+
+        // Initial check
+        checkMobile();
+
+        // Event listener für Resize
+        window.addEventListener('resize', checkMobile);
+        
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useEffect(() => {
 
@@ -75,15 +92,23 @@ export default function Home() {
                 description: 'Sagt Hallo',
                 output: 'Hallo Welt! Dies ist ein benutzerdefinierter Befehl.'
             },
+            'screen': {
+                description: 'Zeigt Bildschirminfo',
+                output: `Bildschirmbreite: ${window.innerWidth}px\nMobile Modus: ${isMobile ? 'Ja' : 'Nein'}\nBreakpoint: ${window.innerWidth < 768 ? 'Mobile' : 'Desktop'}`
+            },
         };
 
-        const terminalInstance = createInteractiveCV('terminal-container', {
+        // Responsive Terminal-Konfiguration
+        const terminalConfig = {
             customCommands: myCommands,
-            height: '800px',
-            width: '900px',
-        });
+            height: isMobile ? '60vh' : '800px', // Auf Mobile 60% der Viewport-Höhe
+            width: isMobile ? '95vw' : '1200px',  // Auf Mobile 95% der Viewport-Breite
+            fontSize: isMobile ? '14px' : '16px', // Kleinere Schrift auf Mobile
+        };
+
+        const terminalInstance = createInteractiveCV('terminal-container', terminalConfig);
         setTerminal(terminalInstance);
-    }, []);
+    }, [isMobile]); // Re-initialisieren wenn sich Mobile-Status ändert
 
     const scrollToSection = (sectionId: string) => {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
@@ -91,6 +116,11 @@ export default function Home() {
 
     return (
         <div className="min-h-screen">
+            {/* Theme Toggle - oben rechts */}
+            <div className="fixed top-4 right-4 md:top-6 md:right-6 z-50">
+                <ModeToggle />
+            </div>
+            
             {/* Strukturierte Daten für SEO */}
             <script
                 type="application/ld+json"
@@ -102,7 +132,71 @@ export default function Home() {
             <div id="terminal-container" />
             {/* Hero Section */}
             <header className="min-h-screen flex items-center justify-center px-4 relative overflow-hidden">
-                <div className="absolute inset-0"></div>
+                {/* Background Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/30"></div>
+                
+                {/* Animated Background Lines (Vite-inspired) - TEST VERSION */}
+                <div className="absolute inset-0 overflow-hidden">
+                    {/* TEST: Sehr sichtbare erste animierte Linie */}
+                    <div className="absolute top-0 left-0 w-full h-2 opacity-80">
+                        <div 
+                            className="absolute inset-0 h-full w-full"
+                            style={{
+                                background: 'linear-gradient(90deg, transparent, #8b5cf6 50%, transparent)',
+                                animation: 'float-right 3s ease-in-out infinite'
+                            }}>
+                        </div>
+                    </div>
+                    
+                    {/* TEST: Sehr sichtbare zweite animierte Linie */}
+                    <div className="absolute bottom-0 right-0 w-full h-2 opacity-60">
+                        <div 
+                            className="absolute inset-0 h-full w-full" 
+                            style={{
+                                background: 'linear-gradient(270deg, transparent, #06b6d4 50%, transparent)',
+                                animation: 'float-left 4s ease-in-out infinite'
+                            }}>
+                        </div>
+                    </div>
+                    
+                    {/* Original subtile Version */}
+                    <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-30">
+                        <div 
+                            className="absolute inset-0 rotate-12"
+                            style={{
+                                background: 'linear-gradient(90deg, transparent, #8b5cf6 50%, transparent)',
+                                animation: 'float-right 8s ease-in-out infinite'
+                            }}>
+                        </div>
+                    </div>
+                    
+                    <div className="absolute -top-1/2 -right-1/2 w-[200%] h-[200%] opacity-25">
+                        <div 
+                            className="absolute inset-0 -rotate-12" 
+                            style={{
+                                background: 'linear-gradient(270deg, transparent, #06b6d4 50%, transparent)',
+                                animation: 'float-left 10s ease-in-out infinite reverse'
+                            }}>
+                        </div>
+                    </div>
+                </div>
+                
+                {/* Sichtbareres dot pattern */}
+                <div 
+                    className="absolute inset-0 opacity-[0.03] bg-repeat"
+                    style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E")`,
+                        backgroundSize: '40px 40px'
+                    }}
+                ></div>
+                
+                {/* Verstärkte floating geometric shapes */}
+                <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" 
+                         style={{ animationDuration: '4s' }}></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" 
+                         style={{ animationDuration: '6s', animationDelay: '2s' }}></div>
+                </div>
                 <div className="text-center z-10 max-w-4xl mx-auto">
                     <h1 className="text-6xl md:text-8xl font-bold mb-6">
                         René Schober
@@ -1468,10 +1562,14 @@ export default function Home() {
             {/* Floating Terminal Button */}
             <Button
                 onClick={() => terminal?.open()}
-                className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-200 z-40"
+                className={`fixed z-40 shadow-lg hover:shadow-xl transition-all duration-200 bg-primary hover:bg-primary/90 text-primary-foreground ${
+                    isMobile 
+                        ? 'bottom-4 right-4 h-12 w-12 rounded-full' // Kleiner auf Mobile
+                        : 'bottom-6 right-6 h-14 w-14 rounded-full'  // Normal auf Desktop
+                }`}
                 title="Terminal öffnen"
             >
-                <TerminalIcon className="h-6 w-6" />
+                <TerminalIcon className={isMobile ? 'h-5 w-5' : 'h-6 w-6'} />
             </Button>
         </div>
     );

@@ -162,3 +162,47 @@
         letter-spacing: var(--tracking-normal);
     }
 }
+
+/* Hero Background Animations */
+@keyframes float-right {
+    0%, 100% {
+        transform: translateX(-200px) rotate(12deg);
+        opacity: 0.1;
+    }
+    50% {
+        transform: translateX(200px) rotate(12deg);
+        opacity: 0.3;
+    }
+}
+
+@keyframes float-left {
+    0%, 100% {
+        transform: translateX(200px) rotate(-12deg);
+        opacity: 0.1;
+    }
+    50% {
+        transform: translateX(-200px) rotate(-12deg);
+        opacity: 0.25;
+    }
+}
+
+@keyframes pulse-slow {
+    0%, 100% {
+        opacity: 0.05;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.15;
+        transform: scale(1.1);
+    }
+}
+
+/* Additional glow effect */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+    }
+}
