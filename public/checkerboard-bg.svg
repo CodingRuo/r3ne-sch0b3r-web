@@ -1,0 +1,10 @@
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dezentes Schachbrett-Pattern -->
+  <defs>
+    <pattern id="checkerboard" width="30" height="30" patternUnits="userSpaceOnUse">
+      <rect width="15" height="15" fill="rgba(255,255,255,0.02)"/>
+      <rect x="15" y="15" width="15" height="15" fill="rgba(255,255,255,0.02)"/>
+    </pattern>
+  </defs>
+  <rect width="60" height="60" fill="url(#checkerboard)"/>
+</svg>

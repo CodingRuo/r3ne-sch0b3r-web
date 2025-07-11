@@ -101,9 +101,15 @@ export default function Home() {
         // Responsive Terminal-Konfiguration
         const terminalConfig = {
             customCommands: myCommands,
-            height: isMobile ? '60vh' : '800px', // Auf Mobile 60% der Viewport-Höhe
-            width: isMobile ? '95vw' : '1200px',  // Auf Mobile 95% der Viewport-Breite
-            fontSize: isMobile ? '14px' : '16px', // Kleinere Schrift auf Mobile
+            height: isMobile ? '70vh' : '800px', // Etwas mehr Höhe auf Mobile
+            width: isMobile ? '98vw' : '1200px',  // Fast Vollbreite auf Mobile
+            fontSize: isMobile ? '13px' : '16px', // Kleinere Schrift auf Mobile
+            // Zusätzliche Mobile-Optimierungen
+            ...(isMobile && {
+                padding: '10px',
+                borderRadius: '8px',
+                maxHeight: '80vh' // Maximale Höhe begrenzen
+            })
         };
 
         const terminalInstance = createInteractiveCV('terminal-container', terminalConfig);
@@ -135,32 +141,22 @@ export default function Home() {
                 {/* Background Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/30"></div>
                 
-                {/* Animated Background Lines (Vite-inspired) - TEST VERSION */}
+                {/* Dezentes Grid-Pattern */}
+                <div 
+                    className="absolute inset-0 opacity-[0.09]"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)
+                        `,
+                        backgroundSize: '40px 40px'
+                    }}>
+                </div>
+                
+                {/* Animated Background Lines (Vite-inspired) - Dezentere Version */}
                 <div className="absolute inset-0 overflow-hidden">
-                    {/* TEST: Sehr sichtbare erste animierte Linie */}
-                    <div className="absolute top-0 left-0 w-full h-2 opacity-80">
-                        <div 
-                            className="absolute inset-0 h-full w-full"
-                            style={{
-                                background: 'linear-gradient(90deg, transparent, #8b5cf6 50%, transparent)',
-                                animation: 'float-right 3s ease-in-out infinite'
-                            }}>
-                        </div>
-                    </div>
-                    
-                    {/* TEST: Sehr sichtbare zweite animierte Linie */}
-                    <div className="absolute bottom-0 right-0 w-full h-2 opacity-60">
-                        <div 
-                            className="absolute inset-0 h-full w-full" 
-                            style={{
-                                background: 'linear-gradient(270deg, transparent, #06b6d4 50%, transparent)',
-                                animation: 'float-left 4s ease-in-out infinite'
-                            }}>
-                        </div>
-                    </div>
-                    
-                    {/* Original subtile Version */}
-                    <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-30">
+                    {/* Subtile diagonale Linien */}
+                    <div className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-15">
                         <div 
                             className="absolute inset-0 rotate-12"
                             style={{
@@ -170,7 +166,7 @@ export default function Home() {
                         </div>
                     </div>
                     
-                    <div className="absolute -top-1/2 -right-1/2 w-[200%] h-[200%] opacity-25">
+                    <div className="absolute -top-1/2 -right-1/2 w-[200%] h-[200%] opacity-10">
                         <div 
                             className="absolute inset-0 -rotate-12" 
                             style={{
@@ -181,20 +177,11 @@ export default function Home() {
                     </div>
                 </div>
                 
-                {/* Sichtbareres dot pattern */}
-                <div 
-                    className="absolute inset-0 opacity-[0.03] bg-repeat"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E")`,
-                        backgroundSize: '40px 40px'
-                    }}
-                ></div>
-                
-                {/* Verstärkte floating geometric shapes */}
+                {/* Floating geometric shapes */}
                 <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" 
+                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse" 
                          style={{ animationDuration: '4s' }}></div>
-                    <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" 
+                    <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" 
                          style={{ animationDuration: '6s', animationDelay: '2s' }}></div>
                 </div>
                 <div className="text-center z-10 max-w-4xl mx-auto">

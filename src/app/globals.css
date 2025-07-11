@@ -163,7 +163,7 @@
     }
 }
 
-/* Hero Background Animations */
+
 @keyframes float-right {
     0%, 100% {
         transform: translateX(-200px) rotate(12deg);
@@ -197,7 +197,6 @@
     }
 }
 
-/* Additional glow effect */
 @keyframes glow {
     0%, 100% {
         box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
