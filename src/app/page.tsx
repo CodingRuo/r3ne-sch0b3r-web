@@ -102,7 +102,7 @@ export default function Home() {
         const terminalConfig = {
             customCommands: myCommands,
             height: isMobile ? '70vh' : '800px', // Etwas mehr Höhe auf Mobile
-            width: isMobile ? '98vw' : '1200px',  // Fast Vollbreite auf Mobile
+            width: isMobile ? '75vw' : '1000px',  // Fast Vollbreite auf Mobile
             fontSize: isMobile ? '13px' : '16px', // Kleinere Schrift auf Mobile
             // Zusätzliche Mobile-Optimierungen
             ...(isMobile && {
